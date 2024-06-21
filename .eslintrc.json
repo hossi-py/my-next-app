@@ -1,3 +1,15 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    // FSD의 import, export 원칙 (ex: 컴포넌트를 직접 import 하면 안된다.)
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": ["@/features/*/*"]
+      }
+    ],
+    "import/no-cycle": "error"
+  }
 }

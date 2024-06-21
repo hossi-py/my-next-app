@@ -1,0 +1,43 @@
+{
+  // font settings
+  "editor.fontLigatures": true,
+  "editor.fontSize": 15,
+
+  // terminal fontSize setting
+  "terminal.integrated.fontSize": 13,
+  // "editor.insertSpaces": true,
+  "editor.detectIndentation": true,
+
+  // eslint & prettier
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "editor.formatOnSave": true
+  },
+  "prettier.configPath": ".prettierrc.json",
+  "eslint.useESLintClass": true,
+  "eslint.options": {
+    "useEslintrc": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+
+  "cSpell.words": [
+    "classiceditor"
+  ],
+  "[javascript][typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    }
+  }
+}
