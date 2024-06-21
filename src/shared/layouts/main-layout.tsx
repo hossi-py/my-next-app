@@ -11,7 +11,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
       <body className={inter.className}>
         <NextUIProvider>
           <ProgressBar />
-          {children}
+          <div className="p-5">{children}</div>
         </NextUIProvider>
       </body>
     </html>

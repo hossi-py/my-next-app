@@ -24,7 +24,7 @@ const ProgressBar = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full">
+    <div className="fixed top-0 left-0 w-full h-4">
       <Progress value={scrollProgress} />
     </div>
   );
