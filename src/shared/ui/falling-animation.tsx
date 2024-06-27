@@ -1,6 +1,7 @@
 'use client';
 
 import React, { ReactNode, useEffect, useState } from 'react';
+import Draggable from 'react-draggable';
 
 // 떨어지는 위치와 회전 조절
 const getRandomPosition = () => ({
@@ -35,7 +36,7 @@ const FallingChip = ({ child, index }: { child: ReactNode; index: number }) => {
         animationDelay: `${index * 0.5}s`,
       }}
     >
-      {child}
+      <Draggable>{child}</Draggable>
       <style jsx>{`
         @keyframes fall-${index} {
           to {

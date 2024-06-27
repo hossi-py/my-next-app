@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  //  react-draggable이 strictmode에서 에러
+  reactStrictMode: false,
 };
 
 export default nextConfig;
