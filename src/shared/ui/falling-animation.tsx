@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import Draggable, { DraggableEventHandler } from 'react-draggable';
 
 // 떨어지는 위치와 회전 조절
@@ -10,7 +10,15 @@ const getRandomPosition = () => ({
   rotate: Math.random() * 60 - 30,
 });
 
-const FallingChip = ({ child, index }: { child: ReactNode; index: number }) => {
+const FallingChip = ({
+  child,
+  index,
+  onDragInArea,
+}: {
+  child: ReactNode;
+  index: number;
+  onDragInArea: (isInArea: boolean, id: number) => void;
+}) => {
   const [position, setPosition] = useState<{
     x: number;
     y: number;
@@ -21,6 +29,12 @@ const FallingChip = ({ child, index }: { child: ReactNode; index: number }) => {
     rotate: 0,
   });
   const [isDragging, setIsDragging] = useState<boolean>(false);
+  // draggable과 transform이 동시에 적용되었을 때 올바른 위치가 적용되지 않음
+  const [finalPosition, setFinalPosition] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
+  const chipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setPosition(getRandomPosition());
@@ -30,8 +44,31 @@ const FallingChip = ({ child, index }: { child: ReactNode; index: number }) => {
     setIsDragging(true);
   };
 
-  const handleStop: DraggableEventHandler = () => {
+  const handleStop: DraggableEventHandler = (e, data) => {
     setIsDragging(false);
+    setFinalPosition({ x: data.x, y: data.y });
+
+    if (chipRef.current) {
+      // 최종 위치가 특정 영역 안에 있는 지 감지
+      const chipRect = chipRef.current.getBoundingClientRect();
+      const targetArea = document.getElementById('target-area');
+      if (targetArea) {
+        const targetRect = targetArea.getBoundingClientRect();
+
+        const isInArea =
+          chipRect.left >= targetRect.left &&
+          chipRect.right <= targetRect.right &&
+          chipRect.top >= targetRect.top &&
+          chipRect.bottom <= targetRect.bottom;
+
+        onDragInArea(isInArea, index);
+      }
+    }
+  };
+
+  const handleDrag: DraggableEventHandler = () => {
+    // 드래그 시작 시 회전을 0으로 설정
+    setPosition((prev) => ({ ...prev, rotate: 0 }));
   };
 
   return (
@@ -40,23 +77,20 @@ const FallingChip = ({ child, index }: { child: ReactNode; index: number }) => {
       style={{
         top: `${-100}px`,
         left: '70%',
-        transform: `translateX(-50%)`,
         animation: `fall-${index} 2s forwards`,
         animationDelay: `${index * 0.5}s`,
         cursor: 'pointer',
+        transform: `rotate(${position.rotate}deg)`,
       }}
     >
-      <Draggable onStart={handleStart} onStop={handleStop}>
-        {child}
+      <Draggable onStart={handleStart} onStop={handleStop} onDrag={handleDrag}>
+        <div ref={chipRef}>{child}</div>
       </Draggable>
-      {/* 기울기가 설정되어 있으면 드래그 시 이동에 불편함이 있음 */}
       <style jsx>{`
         @keyframes fall-${index} {
           to {
             top: ${position.y}px;
             left: calc(70% + ${position.x}px);
-            transform: translateX(-50%)
-              ${isDragging ? '' : `rotate(${position.rotate}deg)`};
           }
         }
       `}</style>
@@ -65,10 +99,18 @@ const FallingChip = ({ child, index }: { child: ReactNode; index: number }) => {
 };
 
 const FallingAnimation = ({ children }: { children: ReactNode }) => {
+  const handleDragInArea = (isInArea: boolean, id: number) => {
+    console.log('들어왔다.', isInArea, id);
+  };
+
   return (
     <div>
       {React.Children.map(children, (child, index) => (
-        <FallingChip child={child} index={index} />
+        <FallingChip
+          child={child}
+          index={index}
+          onDragInArea={handleDragInArea}
+        />
       ))}
     </div>
   );
