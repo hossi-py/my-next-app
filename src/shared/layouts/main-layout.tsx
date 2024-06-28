@@ -1,7 +1,7 @@
 import { NextUIProvider } from '@nextui-org/react';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
-import ProgressBar from '../ui/progress-bar';
+import ProgressBar from '../ui/components/progress-bar';
 
 const inter = Inter({ subsets: ['latin'] });
 

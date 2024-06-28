@@ -28,26 +28,16 @@ const FallingChip = ({
     y: 0,
     rotate: 0,
   });
-  const [isDragging, setIsDragging] = useState<boolean>(false);
   // draggable과 transform이 동시에 적용되었을 때 올바른 위치가 적용되지 않음
-  const [finalPosition, setFinalPosition] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
   const chipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setPosition(getRandomPosition());
   }, []);
 
-  const handleStart: DraggableEventHandler = () => {
-    setIsDragging(true);
-  };
+  const handleStart: DraggableEventHandler = () => {};
 
   const handleStop: DraggableEventHandler = (e, data) => {
-    setIsDragging(false);
-    setFinalPosition({ x: data.x, y: data.y });
-
     if (chipRef.current) {
       // 최종 위치가 특정 영역 안에 있는 지 감지
       const chipRect = chipRef.current.getBoundingClientRect();

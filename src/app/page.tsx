@@ -1,4 +1,5 @@
-import FallingAnimation from '@/shared/ui/falling-animation';
+import ArrowIndicator from '@/shared/ui/components/arrow-indicator';
+import FallingAnimation from '@/shared/ui/components/falling-animation';
 import { Chip } from '@nextui-org/react';
 
 export default function Home() {
@@ -48,7 +49,7 @@ export default function Home() {
               <div className="w-2/5 rounded-lg bg-default-300 h-10"></div>
             </div>
             <div className="flex">
-              <div>Drop Here!</div>
+              <ArrowIndicator direction="down" />
             </div>
           </div>
         </div>
