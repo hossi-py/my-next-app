@@ -90,7 +90,9 @@ const FallingChip = ({
 
 const FallingAnimation = ({ children }: { children: ReactNode }) => {
   const handleDragInArea = (isInArea: boolean, id: number) => {
-    console.log('들어왔다.', isInArea, id);
+    if (isInArea) {
+      alert('들어왔다.');
+    }
   };
 
   return (

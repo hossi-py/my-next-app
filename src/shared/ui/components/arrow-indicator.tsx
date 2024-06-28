@@ -15,9 +15,7 @@ const ArrowIndicator = ({
   direction: 'up' | 'down' | 'left' | 'right';
 }) => {
   return (
-    <div
-      className={`relative flex flex-col items-center ${rotateDegreeMap[direction]}`}
-    >
+    <div className={`relative ${rotateDegreeMap[direction]} h-[60px] w-[30px]`}>
       <style jsx>{`
         @keyframes arrowMove {
           0% {
@@ -47,7 +45,7 @@ const ArrowIndicator = ({
           top: 26px;
           animation-delay: 0.28s;
         }
-      `}</style>{' '}
+      `}</style>
       {/* svg 요소를 화면에 렌더링 시키지 않지만 def 하기 위해 설정 */}
       <svg width="0" height="0">
         <defs>

@@ -38,18 +38,18 @@ export default function Home() {
         {/* Card */}
         <div className="w-[50%] h-full flex items-center justify-center">
           <div className="w-full max-w-md h-full max-h-96 space-y-5 p-4 bg-white rounded-lg shadow-lg">
-            {/* Chip이 놓이는 위치 */}
-            <div
-              className="rounded-lg bg-default-300 h-24"
-              id="target-area"
-            ></div>
+            <div className="rounded-lg bg-default-300 h-24"></div>
             <div className="space-y-3">
               <div className="w-3/5 rounded-lg bg-default-200 h-10"></div>
               <div className="w-4/5 rounded-lg bg-default-200 h-10"></div>
-              <div className="w-2/5 rounded-lg bg-default-300 h-10"></div>
             </div>
-            <div className="flex">
+            <div className="flex flex-col items-center">
               <ArrowIndicator direction="down" />
+              {/* Chip이 놓이는 위치 */}
+              <div
+                className="w-2/5 rounded-lg bg-default-300 h-14"
+                id="target-area"
+              ></div>
             </div>
           </div>
         </div>
