@@ -1,12 +1,12 @@
 import ArrowIndicator from '@/shared/ui/components/arrow-indicator';
 import FallingAnimation from '@/shared/ui/components/falling-animation';
-import { Chip } from '@nextui-org/react';
+import { Card, CardBody, CardHeader, Chip, Image } from '@nextui-org/react';
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="relative w-[90%] md:w-[70%] h-[600px] bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
-        <div className="relative w-[50%] h-full flex items-center justify-center">
+    <div className="bg-[#ACD1DC] md:m-0 p-1 overflow-hidden">
+      <div className="relative flex md:flex-row flex-col bg-white flex-wrap gap-10">
+        <div>
           <FallingAnimation>
             <Chip color="default" size="lg">
               Default
@@ -34,24 +34,26 @@ export default function Home() {
             </Chip>
           </FallingAnimation>
         </div>
-
         {/* Card */}
-        <div className="w-[50%] h-full flex items-center justify-center">
-          <div className="w-full max-w-md h-full max-h-96 space-y-5 p-4 bg-white rounded-lg shadow-lg">
-            <div className="rounded-lg bg-default-300 h-24"></div>
-            <div className="space-y-3">
-              <div className="w-3/5 rounded-lg bg-default-200 h-10"></div>
-              <div className="w-4/5 rounded-lg bg-default-200 h-10"></div>
-            </div>
-            <div className="flex flex-col items-center">
-              <ArrowIndicator direction="down" />
-              {/* Chip이 놓이는 위치 */}
-              <div
-                className="w-2/5 rounded-lg bg-default-300 h-14"
+        <div className="md:absolute md:w-1/3 md:right-0 md:top-1/2 md:-translate-y-1/2 flex items-center justify-center px-5">
+          <Card className="py-4 z-10">
+            <CardHeader className="relative pb-0 pt-2 px-4 flex-col items-start">
+              <p className="text-tiny uppercase font-bold">Daily Mix</p>
+              <small className="text-default-500">12 Tracks</small>
+              <h4 className="font-bold text-large">Frontend Radio</h4>
+              <div className="absolute right-5">
+                <ArrowIndicator direction="down" />
+              </div>
+            </CardHeader>
+            <CardBody className="overflow-visible py-2">
+              <Image
                 id="target-area"
-              ></div>
-            </div>
-          </div>
+                alt="Card background"
+                className="object-cover rounded-xl"
+                src="https://nextui.org/images/hero-card-complete.jpeg"
+              />
+            </CardBody>
+          </Card>
         </div>
       </div>
     </div>
