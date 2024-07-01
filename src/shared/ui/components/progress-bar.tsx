@@ -7,13 +7,13 @@ const ProgressBar = () => {
   const [scrollProgress, setScrollProgress] = useState<number>(0);
 
   const handleScroll = () => {
-    const totalScroll = document.documentElement.scrollTop;
+    const totalScroll = window.scrollY || document.documentElement.scrollTop;
     const windowHeight =
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
-    const scroll = `${(totalScroll / windowHeight) * 100}`;
+    const scroll = (totalScroll / windowHeight) * 100;
 
-    setScrollProgress(parseFloat(scroll));
+    setScrollProgress(parseFloat(scroll.toFixed(2)));
   };
 
   useEffect(() => {
