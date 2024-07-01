@@ -38,9 +38,11 @@ export default function Home() {
         <div className="md:absolute md:w-1/3 md:right-0 md:top-1/2 md:-translate-y-1/2 flex items-center justify-center px-5">
           <Card className="py-4 z-10">
             <CardHeader className="relative pb-0 pt-2 px-4 flex-col items-start">
-              <p className="text-tiny uppercase font-bold">Daily Mix</p>
-              <small className="text-default-500">12 Tracks</small>
-              <h4 className="font-bold text-large">Frontend Radio</h4>
+              <p className="text-sm uppercase font-bold">무엇이 궁금하세요?</p>
+              <small className="text-default-500">You know Yoon ho?</small>
+              <h4 className="font-bold text-xs ">
+                아래 이미지에 태그를 넣어주세요!
+              </h4>
               <div className="absolute right-5">
                 <ArrowIndicator direction="down" />
               </div>

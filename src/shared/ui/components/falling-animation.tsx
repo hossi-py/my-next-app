@@ -17,10 +17,18 @@ const FallingChip = ({
     y: number;
     rotate: number;
   }>({ x: 0, y: 0, rotate: 0 });
+  const [isInArea, setIsInArea] = useState<boolean>(false);
   // draggable과 transform이 동시에 적용되었을 때 올바른 위치가 적용되지 않음
   const chipRef = useRef<HTMLDivElement>(null);
   const draggableRef = useRef<HTMLDivElement>(null);
 
+  /**
+   * props 말고 useEffect로 position 구성?
+   *
+   * Prop className did not match. 오류가 떴다.
+   * 미리 정의한 css 속성이 server랑 client랑 다르다.
+   * 그래서 useEffect로 client 렌더링이 된 후 정의를 해주었다.
+   */
   useEffect(() => {
     setPosition({
       x:
@@ -48,11 +56,7 @@ const FallingChip = ({
 
         // target-area로 들어왔을 때
         if (isInArea) {
-          // setPosition({
-          //   x: 556,
-          //   y: 435,
-          //   rotate: 0,
-          // });
+          setIsInArea(isInArea);
         }
       }
     }
@@ -70,8 +74,12 @@ const FallingChip = ({
         zIndex: 20,
         top: `${-110}px`,
         left: '20%',
-        animation: `fall-${index} 2s forwards`,
-        animationDelay: `${index * 0.5}s`,
+        animation: `${
+          isInArea
+            ? `fall-${index} 2s forwards, fade 2s forwards`
+            : `fall-${index} 2s forwards`
+        }`,
+        animationDelay: `${isInArea ? '' : `${index * 0.5}s`}`,
         cursor: 'pointer',
         transform: `rotate(${position.rotate}deg)`,
       }}
@@ -81,14 +89,24 @@ const FallingChip = ({
           <div ref={chipRef}>{child}</div>
         </div>
       </Draggable>
-      <style jsx>{`
-        @keyframes fall-${index} {
-          to {
-            top: ${position.y}px;
-            left: calc(20% + ${position.x}px);
+      <style jsx>
+        {`
+          @keyframes fall-${index} {
+            to {
+              top: ${position.y}px;
+              left: calc(20% + ${position.x}px);
+            }
           }
-        }
-      `}</style>
+          @keyframes fade {
+            from {
+              opacity: 1;
+            }
+            to {
+              opacity: 0;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
